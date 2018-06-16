@@ -1,0 +1,48 @@
+header{
+	background-color: #000;
+	margin-bottom: 30px;
+}
+.carousel{
+	margin-top: 30px;
+}
+.form-inline{
+	padding-top: 10px;
+}	
+
+.topo{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.carousel-caption h5{
+	font-size: 50px;
+	
+}
+
+.carousel-caption p{
+	font-size: 30px;
+}
+
+.conteudo{
+	margin-top: 50px;
+}
+
+footer{
+	background-color: #ccc;
+	min-height: 200px;
+	margin-top: 40px;
+}
+
+.button-item{
+	text-align: right;
+
+}
+
+.item-adm p{
+	line-height: 50px;
+}
+
+.item-adm:hover{
+	background-color: #eee;
+}
+
