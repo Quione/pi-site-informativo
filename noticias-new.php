@@ -1,15 +1,20 @@
 <?php
 	include "include/conexao.php";
 	
-	$sql = "SELECT id_categoria,nome FROM categoria";
-	$result = $conn->query($sql);
+
+	
 	
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
-	} 
+	} 	
+	
 	if($_POST){
-		$nomecategoria = $_POST['nomecategoria'];
-		$sql = "INSERT INTO categoria VALUES (null, '{$nomecategoria}')";
+		$titulo = $_POST['titulo'];
+		$conteudo = $_POST['conteudo'];
+		$foto = ""; //$_POST['foto'];
+		$categoria = $_POST['categoria'];
+		
+		$sql = "INSERT INTO noticia VALUES (null, '{$titulo}', '{$conteudo}', now(), '{$foto}', '{$categoria}')";
 		
 		if ($conn->query($sql) === TRUE) {
 			$msg = "Cadastrado com sucesso";
@@ -18,6 +23,9 @@
 		}
 
 	}
+	
+	$sql = "SELECT id_categoria,nome FROM categoria";
+	$result = $conn->query($sql);
 	
 	$conn->close();
 	
@@ -50,7 +58,7 @@
 
 <div class="container conteudo">
 
-<form class="form-horizontal">
+<form class="form-horizontal" action="noticias-new.php" method="post">
 <fieldset>
 
 <!-- Form Name -->
@@ -86,7 +94,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textarea">Text Area</label>
   <div class="col-md-8">                     
-    <textarea class="form-control" id="textarea" name="textarea">default text</textarea>
+    <textarea class="form-control" id="conteudo" name="conteudo">default text</textarea>
   </div>
 </div>
 

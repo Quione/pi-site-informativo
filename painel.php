@@ -1,7 +1,7 @@
 <?php
 	include "include/conexao.php";
 	
-	$sql = "SELECT id_categoria,nome FROM noticia";
+	$sql = "SELECT * FROM noticia";
 	$result = $conn->query($sql);
 	
 	$conn->close();
@@ -35,45 +35,44 @@
 
 <div class="card">
 
+
+	
+
   <div class="card-header">
   <div class="row">
   <div class="col-md-8">
     <h3>NOTÍCIAS</h3>
 	</div>
 	<div class="col-md-4 button-item">
-	<a href="" class="btn btn-primary"> Novo</a>
+	<a href="noticias-new.php" class="btn btn-primary"> Novo</a>
 	</div>
 	</div>
   </div>
-  <div class="card-body">
-	<div class="row">
-		  <div class="col-md-8 ">
-			<h5 class="card-title">Título Notícia 1</h5>
-			<p class="card-text">Resumo da notícia</p>
-			
-		  </div>
-		  <div class="col-md-4 button-item">
-			<a href="" class="btn btn-warning"> Atualizar</a>
-			<a href="" class="btn btn-danger"> Excluir</a>
-		  </div>
-	  </div> 
-   </div>
+
    
-   <hr />
+
    
    
     <div class="card-body">
-	<div class="row">
-		  <div class="col-md-8">
-			<h5 class="card-title">Título Notícia 2</h5>
-			<p class="card-text">Resumo da notícia</p>
+<?php
+	if ($result->num_rows > 0) {
+		while($row = $result->fetch_assoc()) {
+			echo '<div class="card-body"><div class="row">';
+			echo ' <div class="col-md-8 ">';
+			echo '<h5 class="card-title">Título Notícia 1</h5>' . $row["titulo"].'</h5>';
+			echo '<p class="card-text">' . substr($row["conteudo"], 0, 200)." ...".'</p>';
+			echo '</div>';
+			echo '<div class="col-md-4 button-item">';
+			echo '<a href="noticias-view.php?id=' . $row["id_noticia"]. '" class="btn btn-warning"> Visualizar</a> ';
 			
-		  </div>
-		  <div class="col-md-4 button-item">
-			<a href="" class="btn btn-warning"> Atualizar</a>
-			<a href="" class="btn btn-danger"> Excluir</a>
-		  </div>
-	  </div> 
+			echo '</div>';
+			echo '</div></div><hr />';
+		}
+	} else {
+		echo "0 results";
+	}
+	?>
+
    </div>
 </div>
 
