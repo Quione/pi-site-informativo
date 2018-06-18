@@ -1,3 +1,13 @@
+<?php
+	include "include/conexao.php";
+	
+	$sql = "SELECT id_categoria,nome FROM noticia";
+	$result = $conn->query($sql);
+	
+	$conn->close();
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
