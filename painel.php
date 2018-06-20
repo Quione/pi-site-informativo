@@ -63,7 +63,7 @@
 			echo '<p class="card-text">' . substr($row["conteudo"], 0, 200)." ...".'</p>';
 			echo '</div>';
 			echo '<div class="col-md-4 button-item">';
-			echo '<a href="noticias-view.php?id=' . $row["id_noticia"]. '" class="btn btn-warning"> Visualizar</a> ';
+			echo '<a href="noticias-view-adm.php?id=' . $row["id_noticia"]. '" class="btn btn-warning"> Visualizar</a> ';
 			
 			echo '</div>';
 			echo '</div></div><hr />';
