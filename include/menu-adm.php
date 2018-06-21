@@ -17,7 +17,9 @@
 		  <li class="nav-item">
 			<a class="nav-link" href="categorias.php">Categorias</a>
 		  </li>
-		  
+		  <li class="nav-item">
+			<a class="nav-link" href="administradores.php">Administradores</a>
+		  </li>		  
 		</ul>
 	  </div>
   </div>
