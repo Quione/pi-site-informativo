@@ -1,3 +1,18 @@
+<?php
+	include "include/conexao.php";
+
+	$id = $_GET['id'];
+	
+	$sql = "SELECT id_noticia,titulo,conteudo, data_postagem FROM noticia where id_noticia={$id}";
+	$noticia = $conn->query($sql);
+	
+	$sql = "SELECT id_noticia,titulo,conteudo FROM noticia";
+	$mais_lidas = $conn->query($sql);
+	
+	$conn->close();
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -34,22 +49,52 @@
 <div class="row">
 <div class="col-md-8">
 
-<h1>Notícia 1 - Descrição</h1>
-<p><span>21/01/2018</span></p>
-<p>
-<i class="fab fa-facebook-square fa-2x"></i> <i class="fab fa-instagram fa-2x"></i> <i class="fab fa-google-plus-square fa-2x"></i> <i class="fab fa-twitter-square fa-2x"></i>
-</p>
- <img src="img/noticia2.jpg" alt="Second slide" width="100%">
- 
- <p>Conteúdo conteúdo  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdoConteúdo conteúdo  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo</p>
- <p>Conteúdo conteúdo  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo Conteúdo conteúdo  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo</p>
- <p>Conteúdo conteúdo  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo Conteúdo conteúdo  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo</p>
- <p>Conteúdo conteúdo  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo</p>
- <p>Conteúdo conteúdo  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo</p>
- <p>Conteúdo conteúdo  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdoConteúdo conteúdo  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo</p>
-</div>
+
+	<?php
+
+	if($noticia){
+		while ($row = $noticia->fetch_assoc()) {
+			echo '<h1>'.$row["titulo"].'</h1>';
+			echo '<p><span>21/01/2018</span></p>';
+			
+			?>
+			
+				<p>
+					<i class="fab fa-facebook-square fa-2x"></i> <i class="fab fa-instagram fa-2x"></i> <i class="fab fa-google-plus-square fa-2x"></i> <i class="fab fa-twitter-square fa-2x"></i>
+				</p>
+				 <img src="img/noticia2.jpg" alt="Second slide" width="100%">
+	
+			
+			<?php
+			
+			echo '<p>'.$row["conteudo"].'</p>';
+			
+			
+		}
+	}
+	
+	?>	
+
+
+	
+	</div>
 <div class="col-md-4">
-	<h3>Notícias Relacionadas</h3>
+<h3>MAIS LIDAS</H3>
+
+
+	<?php
+	
+	if ($mais_lidas->num_rows > 0) {
+		while($row = $mais_lidas->fetch_assoc()) {
+			echo '<div class="mais-lidas">';
+			echo '<h5><a href="noticia.php?id='.$row["id_noticia"].'">'.$row["titulo"].'</a></h5>';
+			echo '<p>'.mb_substr( $row["conteudo"], 0, 70, 'UTF-8' ).'</p>';
+			echo '</div>';
+		}
+	} 
+	?>	
+
+
 </div>
 </div>
 </div>

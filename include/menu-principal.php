@@ -1,3 +1,12 @@
+<?php
+	include "include/conexao.php";
+	
+	$sql = "SELECT id_categoria,nome FROM categoria";
+	$categorias = $conn->query($sql);
+	
+	$conn->close();
+
+?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <div class="container">
   <a class="navbar-brand" href="#">CATEGORIAS</a>
@@ -7,28 +16,26 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Categoria 1</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Categoria 2</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Categoria 3</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Categoria 4</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Categoria 5</a>
-      </li>
+	
+	
+	
+	<?php
+	
+	if ($categorias->num_rows > 0) {
+		while($row = $categorias->fetch_assoc()) {
+			echo '<li class="nav-item">';
+			echo '<a class="nav-link" href="noticias.php?categoria='.$row["id_categoria"].'">'.$row["nome"].' <span class="sr-only">(current)</span></a>';
+			echo '</li>';
+		}
+	} else {
+		echo "0 results";
+	}
+	?>	
+
  
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" method="get" action="pesquisa.php">
+      <input name="p" id="p" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div> </div>

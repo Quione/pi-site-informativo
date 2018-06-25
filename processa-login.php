@@ -32,7 +32,13 @@
 			}
 		
 	}else{
-		echo "off";
+				echo '
+				
+					<script>
+						alert("Login Inválido!")
+						window.location="login.php";
+					</script>
+				';
 	}
 
 ?>

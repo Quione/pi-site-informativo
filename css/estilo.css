@@ -2,6 +2,16 @@ header{
 	background-color: #000;
 	margin-bottom: 30px;
 }
+
+
+p{
+	color: #555;
+}
+
+h1{
+	margin-bottom: 15px;
+}
+
 .carousel{
 	margin-top: 30px;
 }
@@ -46,3 +56,17 @@ footer{
 	background-color: #eee;
 }
 
+
+.mais-lidas p{
+	color: #777;
+}
+
+.list-group-item{
+	margin-top: 30px;
+	border-top: 0px;
+	
+}
+
+.mais-lidas{
+		margin-top: 50px;
+}

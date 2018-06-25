@@ -1,4 +1,4 @@
-<form class="form-inline">
+<form class="form-inline" method="post" action="processa-login.php">
   <label class="sr-only" for="inlineFormInputName2">Name</label>
 
 
@@ -9,7 +9,7 @@
 
 </div>
     </div>
-    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+    <input name="login" id="login" type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
   </div>
 
   <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
@@ -19,7 +19,7 @@
 
 </div>
     </div>
-    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+    <input type="password"  name="senha" id="senha" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
   </div>
 
   <button type="submit" class="btn btn-primary mb-2">Submit</button>

@@ -1,3 +1,15 @@
+<?php
+	include "include/conexao.php";
+
+	$sql = "SELECT id_noticia,titulo,conteudo FROM noticia";
+	$noticias = $conn->query($sql);
+	
+	$sql = "SELECT id_noticia,titulo,conteudo FROM noticia";
+	$mais_lidas = $conn->query($sql);
+	
+	$conn->close();
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -36,40 +48,41 @@
 <div class="row">
 
 <div class="col-md-8">
-<h3>PRINCIPAIS NOTÍCIAS</H3>
+<h2>PRINCIPAIS NOTÍCIAS</H2>
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">
-  <h1><a href="#">Notícia</a></h1>
-  <p>conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo 
-  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo 
-  conteúdo conteúdo conteúdo conteúdo  </p>
-  </li>
-  <li class="list-group-item">
-  <h1><a href="#">Notícia 1</a></h1>
-  <p>conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo 
-  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo 
-  conteúdo conteúdo conteúdo conteúdo  </p></li>
-  <li class="list-group-item">
-  <h1><a href="#">Notícia 2</a></h1>
-  <p>conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo 
-  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo 
-  conteúdo conteúdo conteúdo conteúdo  </p></li>
-  <li class="list-group-item">
-  <h1><a href="#">Notícia 3</a></h1>
-  <p>conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo 
-  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo 
-  conteúdo conteúdo conteúdo conteúdo  </p>
-  </li>
-  <li class="list-group-item">
-  <h1><a href="#">Notícia 4</a></h1>
-  <p>conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo 
-  conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo conteúdo 
-  conteúdo conteúdo conteúdo conteúdo  </p></li>
+
+	<?php
+	
+	if ($noticias->num_rows > 0) {
+		while($row = $noticias->fetch_assoc()) {
+			echo '<li class="list-group-item">';
+			echo '<h3><a href="noticia.php?id='.$row["id_noticia"].'">'.$row["titulo"].'</a></h3>';
+			echo '<p>'.mb_substr( $row["conteudo"], 0, 200, 'UTF-8' ).'</p>';
+			echo '</li>';
+		}
+	} 
+	?>	
+
+
 </ul>
 </div>
 <div class="col-md-4">
-<h3>ÚLTIMAS NOTÍCIAS</H3>
-<div></div>
+<h3>MAIS LIDAS</H3>
+
+
+	<?php
+	
+	if ($mais_lidas->num_rows > 0) {
+		while($row = $mais_lidas->fetch_assoc()) {
+			echo '<div class="mais-lidas">';
+			echo '<h5><a href="noticia.php?id='.$row["id_noticia"].'">'.$row["titulo"].'</a></h5>';
+			echo '<p>'.mb_substr( $row["conteudo"], 0, 70, 'UTF-8' ).'</p>';
+			echo '</div>';
+		}
+	} 
+	?>	
+
+
 </div>
 </div>
 </div>
