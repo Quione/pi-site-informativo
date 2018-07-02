@@ -1,10 +1,10 @@
 <?php
 	include "include/conexao.php";
 
-	$sql = "SELECT id_noticia,titulo,conteudo FROM noticia";
+	$sql = "SELECT id_noticia,titulo,conteudo,foto FROM noticia";
 	$noticias = $conn->query($sql);
 	
-	$sql = "SELECT id_noticia,titulo,conteudo FROM noticia";
+	$sql = "SELECT id_noticia,titulo,conteudo,foto FROM noticia";
 	$mais_lidas = $conn->query($sql);
 	
 	$conn->close();
@@ -49,22 +49,28 @@
 
 <div class="col-md-8">
 <h2>PRINCIPAIS NOTÍCIAS</H2>
-<ul class="list-group list-group-flush">
+
 
 	<?php
 	
 	if ($noticias->num_rows > 0) {
 		while($row = $noticias->fetch_assoc()) {
-			echo '<li class="list-group-item">';
+			echo '<div class="row" style="margin-top: 40px;">';
+			echo '<div class="col-md-2">';
+			echo '<img width="100" src="img/noticia/'.$row["foto"].'" />';
+			
+			echo '</div>';
+			echo '<div class="col-md-10">';
 			echo '<h3><a href="noticia.php?id='.$row["id_noticia"].'">'.$row["titulo"].'</a></h3>';
 			echo '<p>'.mb_substr( $row["conteudo"], 0, 200, 'UTF-8' ).'</p>';
-			echo '</li>';
+			echo '</div>';
+			echo '</div>';
 		}
 	} 
 	?>	
 
 
-</ul>
+
 </div>
 <div class="col-md-4">
 <h3>MAIS LIDAS</H3>

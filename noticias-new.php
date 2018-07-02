@@ -1,17 +1,21 @@
 <?php
 	include "include/conexao.php";
+	include "include/functions.php";
 	
-
+	
 	
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	} 	
 	
 	if($_POST){
+		
 		$titulo = $_POST['titulo'];
 		$conteudo = $_POST['conteudo'];
-		$foto = ""; //$_POST['foto'];
 		$categoria = $_POST['categoria'];
+		
+		
+		$foto = uploadImg();
 		
 		$sql = "INSERT INTO noticia VALUES (null, '{$titulo}', '{$conteudo}', now(), '{$foto}', '{$categoria}')";
 		
@@ -20,7 +24,6 @@
 		} else {
 			$msg = "Error: " . $sql . "<br>" . $conn->error;
 		}
-
 	}
 	
 	$sql = "SELECT id_categoria,nome FROM categoria";
@@ -57,7 +60,7 @@
 
 <div class="container conteudo">
 
-<form class="form-horizontal" action="noticias-new.php" method="post">
+<form class="form-horizontal" action="noticias-new.php" method="post"  enctype="multipart/form-data">
 <fieldset>
 
 <!-- Form Name -->
@@ -68,6 +71,16 @@
   <label class="col-md-4 control-label" for="titulo">Título</label>  
   <div class="col-md-8">
   <input id="titulo" name="titulo" type="text" placeholder="" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="titulo">Imagem</label>  
+  <div class="col-md-8">
+  <input id="imagem" name="imagem" type="file" placeholder="" class="form-control input-md" required="">
     
   </div>
 </div>
