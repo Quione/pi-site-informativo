@@ -1,10 +1,29 @@
 <?php
 	include "include/conexao.php";
 	
-	$sql = "SELECT * FROM noticia";
+	// PAGINAÇÃO
+	$total_reg = "5"; 
+	
+	if (!isset($_GET['pagina'])) {
+		$pc = "1";
+	} else {
+		$pc = $_GET['pagina'];
+	}
+	
+	$inicio = $pc - 1;
+	$inicio = $inicio * $total_reg;
+	
+	
+	$sql = "SELECT * FROM noticia LIMIT $inicio,$total_reg";
 	$result = $conn->query($sql);
 	
+	$tr = $result->num_rows; // verifica o número total de registros
+	$tp = $tr / $total_reg; // verifica o número total de páginas
+	
 	$conn->close();
+	
+
+	
 ?>
 
 
@@ -59,7 +78,7 @@
 		while($row = $result->fetch_assoc()) {
 			echo '<div class="card-body"><div class="row">';
 			echo ' <div class="col-md-8 ">';
-			echo '<h5 class="card-title">Título Notícia 1</h5>' . $row["titulo"].'</h5>';
+			echo '<h5 class="card-title">' . $row["id_noticia"].$row["titulo"].'</h5>';
 			echo '<p class="card-text">' . substr($row["conteudo"], 0, 200)." ...".'</p>';
 			echo '</div>';
 			echo '<div class="col-md-4 button-item">';
@@ -75,6 +94,17 @@
 
    </div>
 </div>
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+   <?php
+   for($x=1;$x<$total_reg;$x++){
+    echo '<li class="page-item"><a class="page-link" href="painel.php?pagina='.$x.'">'.$x.'</a></li>';
+	}
+	?>
+  </ul>
+</nav>
 
 </div>
 
