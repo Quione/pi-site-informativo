@@ -5,12 +5,12 @@
 	$total_reg = "5"; 
 	
 	if (!isset($_GET['pagina'])) {
-		$pc = "1";
+		$p = "1";
 	} else {
-		$pc = $_GET['pagina'];
+		$p = $_GET['pagina'];
 	}
 	
-	$inicio = $pc - 1;
+	$inicio = $p - 1;
 	$inicio = $inicio * $total_reg;
 	
 	
